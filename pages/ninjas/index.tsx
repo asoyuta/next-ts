@@ -1,36 +1,9 @@
 import styles from '../../styles/Ninjas.module.css'
 import Link from 'next/link'
 import { GetStaticProps } from 'next'
+import { Data } from '../../types/index.d'
 
-export type User = {
-  id: number
-  name: string
-  username: string
-  email: string
-  address: {
-    street: string
-    suite: string
-    city: string
-    zipcode: string
-    geo: {
-      lat: string
-      lng: string
-    }
-  }
-  phone: string
-  website: string
-  company: {
-    name: string
-    catchPhrase: string
-    bs: string
-  }
-}
-
-type UsersData = {
-  users: User[]
-}
-
-export const getStaticProps: GetStaticProps<UsersData> = async () => {
+export const getStaticProps: GetStaticProps<Data> = async () => {
   const res = await fetch('https://jsonplaceholder.typicode.com/users')
   const users = await res.json()
 
@@ -39,7 +12,7 @@ export const getStaticProps: GetStaticProps<UsersData> = async () => {
   }
 }
 
-const Ninjas = ({ users }: UsersData) => {
+const Ninjas = ({ users }: Data) => {
   return (
     <div>
       <h1>All Ninjas</h1>
